@@ -1,0 +1,20 @@
+[run]
+branch = True
+omit = *migrations*,
+       *urls*,
+       *test*,
+       *admin*,
+       ./manage.py,
+       ./src/config/*,
+       ./src/wsgi.py,
+       *__init__*
+
+[report]
+omit = *migrations*,
+       *urls*,
+       *test*,
+       *admin*,
+       ./manage.py,
+       ./src/config/*,
+       ./src/wsgi.py,
+       *__init__*

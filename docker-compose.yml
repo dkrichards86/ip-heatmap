@@ -1,0 +1,67 @@
+version: '3.3'
+
+services:
+  postgres:
+    container_name: heatmap_database
+    image: postgres-gis:9.6.12
+    ports:
+      - 5432:5432
+    volumes:
+      - heatmap-data:/var/lib/postgresql/data
+
+  redis:
+    container_name: heatmap_redis
+    image: redis:4.0
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile.dev
+    image: heatmap_backend
+    container_name: heatmap_backend
+    ports:
+      - 8080:8080
+    command: >
+      bash -c "python wait_for_postgres.py &&
+               ./manage.py migrate &&
+               ./manage.py runserver 0.0.0.0:8080"
+    environment:
+      DJANGO_SECRET_KEY: /run/secrets/django_secret_key
+    depends_on:
+      - redis
+      - postgres
+    secrets:
+       - django_secret_key
+    volumes:
+      - ./server/:/code/
+  
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile.dev
+    image: heatmap_frontend
+    container_name: heatmap_frontend
+    command: npm run start
+    volumes:
+      - ./client/:/code/
+      - heatmap_node_modules:/code/node_modules
+
+  nginx:
+    container_name: heatmap_nginx
+    image: nginx:1.15
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+      - frontend
+    command: /bin/bash -c "nginx -g 'daemon off;'"
+
+secrets:
+  django_secret_key:
+    file: django_secret_key.txt
+
+volumes:
+  heatmap-data:
+  heatmap_node_modules:

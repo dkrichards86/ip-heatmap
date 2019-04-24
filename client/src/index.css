@@ -1,0 +1,63 @@
+html {
+  background-color: #f9f9f9;
+  font-size: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+  box-shadow: 0 2px 3px hsla(0,0%,53%,.1);
+}
+
+.navbar-brand {
+  font-size: 2rem;
+}
+
+main {
+  padding: 0 3rem;
+}
+
+.map-container {
+  position: relative;
+  height: 640px;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.map-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  color: #000;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+}

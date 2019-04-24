@@ -1,0 +1,12 @@
+FROM node:10.15-stretch as builder
+
+WORKDIR /code
+COPY ./package.json ./package-lock.json /code/
+RUN npm install
+COPY . /code
+RUN npm run build
+
+FROM node:10.15-stretch
+COPY --from=builder /code/build/ /code/build
+RUN npm install -g http-server
+WORKDIR /code
