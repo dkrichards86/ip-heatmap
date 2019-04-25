@@ -3,7 +3,7 @@ version: '3.3'
 services:
   postgres:
     container_name: heatmap_database
-    image: postgres-gis:9.6.12
+    image: dkrichards86/postgres-gis:9.6.12
     volumes:
       - heatmap_data:/var/lib/postgresql/data
 

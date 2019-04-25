@@ -10,25 +10,14 @@ and [Backend](./server/README.md) READMEs.
 This assumes Docker (and Docker Compose) are installed.
 
 ### Building Base Images
-First, build the base images. These images include binaries and GIS specific
-dependencies required by the webserver. These can be done the easy way, or the
-hard way.
-
-#### The Easy Way
-Run `./bin/build_base_images.sh`. Voila.
-
-#### The Hard Way
-To build the PostgreSQL base image with PostGIS installed, run:  `docker build -t postgres-gis:<tag> -f Dockerfile.postgresgis .`
-
-To build the Python base image with GEOS, Proj.4 and GDAL installed, run: `docker build -t python-gis:<tag> -f Dockerfile.pythongis .`
-
-**Note:** The GIS binaries take a while to install (~1 hour).
-
-Finally, run `docker-compose build` to build service specific images.
+First, build the service images. To do so, `docker-compose build`. The backend
+is based on [Python-GIS](https://hub.docker.com/r/dkrichards86/python-gis),
+the frontend on [Node](https://hub.docker.com/_/node/), and PostgreSQL on
+[PostgreSQL-GIS](https://hub.docker.com/r/dkrichards86/postgres-gis).
 
 ### Seeding the Database
 Once all containers are built, you will need to seed the database with IP address
-information. This too can be done the easy way or the hard way.
+information. This can be done the easy way, or the hard way.
 
 #### Easy
 Run `./bin/seed_app.sh`
