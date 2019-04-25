@@ -4,7 +4,7 @@ WORKDIR /wheels
 COPY ./requirements.txt requirements.txt
 RUN pip wheel -r requirements.txt
 
-FROM python-gis:1.0.0
+FROM dkrichards86/postgres-gis:3.6.8
 COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir -r /wheels/requirements.txt -f /wheels && rm -rf /wheels
 

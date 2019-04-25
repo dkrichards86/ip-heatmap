@@ -1,4 +1,4 @@
-FROM python-gis:1.0.0
+FROM dkrichards86/postgres-gis:3.6.8
 ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt requirements.txt
 RUN pip install -r requirements.txt
